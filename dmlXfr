@@ -1,0 +1,73 @@
+from tkinter import *
+from tkinter.filedialog import askopenfile
+import tkinter as tk
+import tkinter.messagebox
+
+
+def process():
+    sshUser = Entry.get(E1)
+    sshPassword = Entry.get(E2)
+    appProject = Entry.get(O3)
+    dbcFile = Entry.get(B4)
+    tblFile = Entry.get(B5)
+    print('Hey')
+
+def load_file():
+    fname=tkinter.filedialog.askopenfilename(parent=top, initialdir="/", title="Select file",
+                                       filetypes=(("all files", "*.*"),("dbc files", "*.dbc")))
+    if fname:
+        print("""File selected:"""+ fname)
+    else:
+        print("Failed to select file\n'%s'" )
+    return
+
+
+top = tk.Tk()
+top.title("DML & XFR Generator")
+top.geometry("600x500+0+0")
+rows = 0
+while rows < 10:
+    top.rowconfigure(rows, weight=1)
+    top.columnconfigure(rows, weight=1)
+    rows += 1
+
+appProj = [
+"LOSS",
+"MOSS",
+"CSCS"
+] #etc
+
+OPTIONS = [
+    ("DML",1),
+    ("XFR",2),
+    ("BOTH",3),
+]
+v = tk.IntVar()
+v = StringVar()
+v.set(3)
+defaultProj = StringVar(top)
+defaultProj.set(appProj[0]) # default value
+L1 = Label(top, text="For Internal use only. Chase&Co.", font=('calibiri', 12, 'bold'), fg='blue').grid(row=0, column=1)
+L2 = Label(top, text="SSH User", font=('arial', 10, 'normal'), ).grid(row=1,column=0)
+L3 = Label(top, text="SSH Password", font=('calibiri', 10, 'normal'), ).grid(row=2, column=0)
+L4 = Label(top, text="Select App Project", font=('calibiri', 10, 'normal'), ).grid(row=3, column=0)
+L5 = Label(top, text="Upload DBC file", font=('calibiri', 10, 'normal'), ).grid(row=4, column=0)
+L6 = Label(top, text="Upload Table config file", font=('calibiri', 10, 'normal'), ).grid(row=5, column=0)
+L7 = Label(top, text="What do you want to create?", font=('calibiri', 10, 'normal'), ).grid(row=6, column=0)
+E1 = Entry(top, bd=5)
+E1.grid(row=1, column=1)
+E2 = Entry(top, bd=5, show='*')
+E2.grid(row=2, column=1)
+O3 = OptionMenu(top, defaultProj, *appProj)
+O3.configure(width=15)
+O3.grid(row=3, column=1)
+B4 = Button(top, text="Browse for dbc file", command=load_file, justify='center')
+B4.configure(width=15)
+B4.grid(row=4, column=1, )
+B5 = Button(top, text="Browse for config file", command=load_file, justify='center')
+B5.configure(width=15)
+B5.grid(row=5, column=1)
+for text, val in OPTIONS:
+   R6 = Radiobutton(top, text=text, variable=v, value=val).grid(row=6, column=val)
+B7 = Button(top, text="Generate", command=process, justify='center').grid(row=7,column=1,)
+top.mainloop()
