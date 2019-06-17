@@ -47,7 +47,7 @@ v = StringVar()
 v.set(3)
 defaultProj = StringVar(top)
 defaultProj.set(appProj[0]) # default value
-L1 = Label(top, text="For Internal use only. Chase&Co.", font=('calibiri', 12, 'bold'), fg='blue').grid(row=0, column=1)
+L1 = Label(top, text="For Internal use only. Sasi&Co.", font=('calibiri', 12, 'bold'), fg='blue').grid(row=0, column=1)
 L2 = Label(top, text="SSH User", font=('arial', 10, 'normal'), ).grid(row=1,column=0)
 L3 = Label(top, text="SSH Password", font=('calibiri', 10, 'normal'), ).grid(row=2, column=0)
 L4 = Label(top, text="Select App Project", font=('calibiri', 10, 'normal'), ).grid(row=3, column=0)
